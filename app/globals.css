@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grain-opacity: 0.035;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: #0a0a0c;
+  color: #ededf0;
+  font-feature-settings: "ss01", "cv01", "cv11";
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ff2d78;
+  color: #0a0a0c;
+}
+
+/* Fine hairline scrollbar in accent-neutral tone */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #26262c;
+  border: 3px solid #0a0a0c;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #33333b;
+}
+
+/* Numeric tabular alignment for all data */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Subtle film grain overlay layer */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Focus-visible ring — accessible, on-brand */
+:focus-visible {
+  outline: 2px solid #ff2d78;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Range input reset for the simulator slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: grab;
+}
+input[type="range"]:active {
+  cursor: grabbing;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+}
+input[type="range"]::-moz-range-thumb {
+  height: 0;
+  width: 0;
+  border: 0;
+}
